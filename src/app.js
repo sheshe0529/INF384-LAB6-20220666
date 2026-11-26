@@ -11,6 +11,11 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', cursos: repositorio.listar().length });
 });
 
-// Aquí se montará el router de cursos: app.use('/cursos', require('./routes/cursos'));
+app.use('/cursos', require('./routes/cursos'));
+
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  res.status(500).json({ error: 'internal server error' });
+});
 
 module.exports = app;
