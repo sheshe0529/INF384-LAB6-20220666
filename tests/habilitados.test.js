@@ -484,3 +484,83 @@ describe('Orden de validación (Requisito 6)', () => {
   });
 
 });
+
+// ─── Tests de utilidades — src/util/formato.js ───────────────────────────────
+
+const {
+  formatearNombre,
+  formatearCreditos,
+  formatearCiclo,
+  formatearTipo,
+  resumenCurso,
+  totalCreditos,
+  agruparPorCiclo,
+  ordenarPorCreditos,
+  listaRequisitos,
+} = require('../src/util/formato');
+
+describe('formato.js — utilidades de presentación', () => {
+
+  test('formatearNombre convierte a Title Case', () => {
+    expect(formatearNombre('programación orientada a objetos')).toBe('Programación Orientada A Objetos');
+    expect(formatearNombre('CÁLCULO')).toBe('Cálculo');
+  });
+
+  test('formatearCreditos formatea con un decimal y unidad', () => {
+    expect(formatearCreditos(4)).toBe('4.0 créditos');
+    expect(formatearCreditos(3.5)).toBe('3.5 créditos');
+  });
+
+  test('formatearCiclo devuelve "Electivo" para null/undefined y "Ciclo N" para número', () => {
+    expect(formatearCiclo(null)).toBe('Electivo');
+    expect(formatearCiclo(undefined)).toBe('Electivo');
+    expect(formatearCiclo(5)).toBe('Ciclo 5');
+  });
+
+  test('formatearTipo devuelve "Obligatorio" u "Electivo"', () => {
+    expect(formatearTipo('obligatorio')).toBe('Obligatorio');
+    expect(formatearTipo('electivo')).toBe('Electivo');
+    expect(formatearTipo('otro')).toBe('Electivo');
+  });
+
+  test('resumenCurso construye el resumen de un curso', () => {
+    const curso = { id: '1INF25', name: 'Cálculo', credits: 4 };
+    expect(resumenCurso(curso)).toBe('1INF25 · Cálculo · 4.0 créditos');
+  });
+
+  test('totalCreditos suma los créditos de un array de cursos', () => {
+    expect(totalCreditos([{ credits: 4 }, { credits: 3 }])).toBe(7);
+    expect(totalCreditos([])).toBe(0);
+  });
+
+  test('agruparPorCiclo agrupa correctamente por ciclo', () => {
+    const cursos = [
+      { id: 'A', credits: 4, cycle: 5 },
+      { id: 'B', credits: 3, cycle: 5 },
+      { id: 'C', credits: 4, cycle: null },
+    ];
+    const grupos = agruparPorCiclo(cursos);
+    expect(grupos['Ciclo 5']).toBeDefined();
+    expect(grupos['Ciclo 5'].length).toBe(2);
+    expect(grupos['Electivo']).toBeDefined();
+    expect(grupos['Electivo'].length).toBe(1);
+  });
+
+  test('ordenarPorCreditos ordena por créditos desc, luego id asc', () => {
+    const cursos = [
+      { id: 'B', credits: 3 },
+      { id: 'A', credits: 4 },
+      { id: 'C', credits: 4 },
+    ];
+    const result = ordenarPorCreditos(cursos);
+    expect(result[0].id).toBe('A');
+    expect(result[1].id).toBe('C');
+    expect(result[2].id).toBe('B');
+  });
+
+  test('listaRequisitos devuelve "Sin requisitos" para array vacío y lista ordenada en otro caso', () => {
+    expect(listaRequisitos([])).toBe('Sin requisitos');
+    expect(listaRequisitos(['1INF27', '1INF25'])).toBe('1INF25, 1INF27');
+  });
+
+});
