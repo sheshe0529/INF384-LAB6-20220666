@@ -10,7 +10,7 @@ Cinco tareas en secuencia estricta que siguen un ciclo red-green-refactor extend
 
 ## Tasks
 
-- [ ] 1. Flujo funcional de POST /habilitados
+- [x] 1. Flujo funcional de POST /habilitados
   - Instalar fast-check como devDependency (`npm install --save-dev fast-check`).
   - Crear `src/util/calcularHabilitados.js` con la función pura:
     - Recibe `aprobados: string[]`.
