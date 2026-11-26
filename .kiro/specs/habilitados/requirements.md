@@ -1,4 +1,4 @@
-﻿# Requirements Document
+# Requirements Document
 
 ## Introduction
 
@@ -68,8 +68,7 @@ no es un array, para evitar comportamientos incorrectos silenciosos.
 ### Requirement 3: Validación de tamaño de entrada
 
 **User Story:** Como operador de la API, quiero que el sistema rechace listas de aprobados
-excesivamente largas y cuerpos demasiado grandes antes de ejecutar el cálculo, para que el tiempo
-de respuesta no supere 200 ms independientemente del tamaño del payload.
+excesivamente largas y cuerpos demasiado grandes antes de ejecutar el cálculo.
 
 #### Acceptance Criteria
 
@@ -135,3 +134,13 @@ determinista, para que los mensajes de error sean predecibles y los tests sean r
    de tamaño (Requirement 3) y responder 400 antes de evaluar el formato de los elementos.
 4. CUANDO `aprobados` es un array de longitud válida pero con algún elemento inválido, EL SISTEMA
    DEBE aplicar la validación de formato (Requirement 4) y responder 400.
+
+---
+
+### Requirement 7: Calidad - cobertura de pruebas
+
+**User Story:** Como equipo de TI, quiero una cobertura minima de pruebas, para detectar cambios sin probar.
+
+#### Acceptance Criteria
+
+1. SI la cobertura de lineas es menor a 80 %, EL PIPELINE DEBE terminar con estado fallido en el job cobertura.
