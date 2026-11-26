@@ -1,4 +1,4 @@
-# Requirements Document
+﻿# Requirements Document
 
 ## Introduction
 
@@ -54,28 +54,30 @@ no es un array, para evitar comportamientos incorrectos silenciosos.
 
 #### Acceptance Criteria
 
-1. SI `aprobados` no está presente en el cuerpo de la petición, EL SISTEMA DEBE responder 422 con
+1. SI `aprobados` no está presente en el cuerpo de la petición, EL SISTEMA DEBE responder 400 con
    `{ "error": "aprobados debe ser un array" }`.
-2. SI `aprobados` es un string (p. ej. `"1INF25"`), EL SISTEMA DEBE responder 422 con
+2. SI `aprobados` es un string (p. ej. `"1INF25"`), EL SISTEMA DEBE responder 400 con
    `{ "error": "aprobados debe ser un array" }`.
-3. SI `aprobados` es un número, booleano u otro tipo no-array, EL SISTEMA DEBE responder 422 con
+3. SI `aprobados` es un número, booleano u otro tipo no-array, EL SISTEMA DEBE responder 400 con
    `{ "error": "aprobados debe ser un array" }`.
-4. SI el cuerpo de la petición está vacío o no es JSON válido, EL SISTEMA DEBE responder 422 con
-   `{ "error": "aprobados debe ser un array" }`.
+4. SI el cuerpo de la petición es JSON mal formado, EL SISTEMA DEBE responder 400 con
+   `{ "error": <mensaje del parser> }` sin exponer stack traces ni rutas internas del servidor.
 
 ---
 
 ### Requirement 3: Validación de tamaño de entrada
 
 **User Story:** Como operador de la API, quiero que el sistema rechace listas de aprobados
-excesivamente largas antes de ejecutar el cálculo, para que el tiempo de respuesta no supere 200 ms
-independientemente del tamaño del payload.
+excesivamente largas y cuerpos demasiado grandes antes de ejecutar el cálculo, para que el tiempo
+de respuesta no supere 200 ms independientemente del tamaño del payload.
 
 #### Acceptance Criteria
 
-1. SI `aprobados` es un array con más de 500 elementos, EL SISTEMA DEBE responder 400 con
-   `{ "error": "aprobados no puede superar 500 elementos" }` en un tiempo inferior a 200 ms desde
-   la recepción de la petición, sin ejecutar el cálculo de habilitados.
+1. SI `aprobados` es un array con más de 87 elementos, EL SISTEMA DEBE responder 400 con
+   `{ "error": "aprobados no puede superar 87 elementos" }` sin ejecutar el cálculo de habilitados.
+2. SI el cuerpo de la petición supera los 4 kb, EL SISTEMA DEBE responder 413 con
+   `{ "error": "cuerpo demasiado grande" }`. Este rechazo es manejado por el middleware de error
+   global, no por la lógica de la ruta.
 
 ---
 
@@ -95,6 +97,10 @@ identificadores de curso válidos.
 3. SI algún elemento de `aprobados` es una cadena vacía, EL SISTEMA DEBE responder 400 con
    `{ "error": "elemento inválido en aprobados" }`.
 4. SI algún elemento de `aprobados` supera 10 caracteres, EL SISTEMA DEBE responder 400 con
+   `{ "error": "elemento inválido en aprobados" }`.
+5. SI algún elemento de `aprobados` es el número `123` (tipo number, no string), EL SISTEMA DEBE
+   responder 400 con `{ "error": "elemento inválido en aprobados" }`.
+6. SI algún elemento de `aprobados` es `null`, EL SISTEMA DEBE responder 400 con
    `{ "error": "elemento inválido en aprobados" }`.
 
 ---
@@ -121,9 +127,11 @@ determinista, para que los mensajes de error sean predecibles y los tests sean r
 
 #### Acceptance Criteria
 
-1. CUANDO el cuerpo contiene `aprobados` que no es un array, EL SISTEMA DEBE aplicar primero la
-   validación de tipo (Requirement 2) y responder 422 antes de evaluar tamaño o formato.
-2. CUANDO `aprobados` es un array con más de 500 elementos, EL SISTEMA DEBE aplicar la validación
+1. CUANDO el body supera 4 kb, EL SISTEMA DEBE rechazarlo con 413 antes de que llegue al router,
+   mediante el middleware de limit de `express.json`.
+2. CUANDO el cuerpo contiene `aprobados` que no es un array, EL SISTEMA DEBE aplicar primero la
+   validación de tipo (Requirement 2) y responder 400 antes de evaluar tamaño o formato.
+3. CUANDO `aprobados` es un array con más de 87 elementos, EL SISTEMA DEBE aplicar la validación
    de tamaño (Requirement 3) y responder 400 antes de evaluar el formato de los elementos.
-3. CUANDO `aprobados` es un array de longitud válida pero con algún elemento inválido, EL SISTEMA
+4. CUANDO `aprobados` es un array de longitud válida pero con algún elemento inválido, EL SISTEMA
    DEBE aplicar la validación de formato (Requirement 4) y responder 400.
