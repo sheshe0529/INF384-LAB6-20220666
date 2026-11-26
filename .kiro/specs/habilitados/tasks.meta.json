@@ -48,6 +48,18 @@
         "chatSessionId": "sess_85365bfc-9fa8-482a-9436-6c1026812287",
         "timestamp": 1795732485339
       }
+    ],
+    "5. Correcciones detectadas por los gates": [
+      {
+        "executionId": "4c21ed39-313f-426e-8722-92e939ad7b6b",
+        "chatSessionId": "sess_43cb46c1-b99d-4019-a417-7b739349e4ef",
+        "timestamp": 1795732609965
+      },
+      {
+        "executionId": "4c21ed39-313f-426e-8722-92e939ad7b6b",
+        "chatSessionId": "sess_43cb46c1-b99d-4019-a417-7b739349e4ef",
+        "timestamp": 1795733002670
+      }
     ]
   }
 }

@@ -91,7 +91,7 @@ Cinco tareas en secuencia estricta que siguen un ciclo red-green-refactor extend
   - Todos los jobs corren en `ubuntu-latest` y se activan en push y PR a `main`.
   - _Requisitos: Requisito de calidad (≥ 80 % cobertura); Decisiones de gates de CI en design.md_
 
-- [ ] 5. Correcciones detectadas por los gates
+- [x] 5. Correcciones detectadas por los gates
   - Ejecutar localmente cada gate y registrar los hallazgos antes de corregir:
     - `npm audit --audit-level=high` → actualizar o reemplazar dependencias con severidad alta o crítica.
     - Gitleaks en historial completo (`fetch-depth: 0`) → si se detecta una clave, tratarla como rotada y registrarla en `.gitleaksignore` con su razón (fingerprint + comentario explicativo); no reescribir historial.
