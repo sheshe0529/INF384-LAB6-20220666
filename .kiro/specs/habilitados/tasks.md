@@ -68,7 +68,7 @@ Cinco tareas en secuencia estricta que siguen un ciclo red-green-refactor extend
   - Ejecutar `npm test`; todos los tests de la tarea 2 deben pasar ahora.
   - _Requisitos: 2.1, 2.2, 2.3, 2.4, 3.1, 3.2, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 6.1, 6.2, 6.3, 6.4_
 
-- [ ] 4. Gates en .github/workflows/ci.yml
+- [x] 4. Gates en .github/workflows/ci.yml
   - No modificar ningún archivo de `src/` ni de `tests/`.
   - Agregar job `sca` (npm audit):
     - Ejecuta `npm audit --audit-level=high`.
