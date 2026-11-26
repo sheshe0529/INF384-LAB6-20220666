@@ -24,6 +24,18 @@
         "chatSessionId": "sess_62cec253-99de-488d-89df-f9552955e010",
         "timestamp": 1795732286216
       }
+    ],
+    "3. Validaciones, límite de cuerpo y manejo de errores": [
+      {
+        "executionId": "97a98804-6cc3-4536-a684-e87071d8eb0f",
+        "chatSessionId": "sess_838db847-d0cf-4147-8f86-ac6ecae4feff",
+        "timestamp": 1795732349505
+      },
+      {
+        "executionId": "97a98804-6cc3-4536-a684-e87071d8eb0f",
+        "chatSessionId": "sess_838db847-d0cf-4147-8f86-ac6ecae4feff",
+        "timestamp": 1795732399803
+      }
     ]
   }
 }

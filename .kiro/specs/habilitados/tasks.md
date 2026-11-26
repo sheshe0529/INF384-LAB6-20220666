@@ -56,7 +56,7 @@ Cinco tareas en secuencia estricta que siguen un ciclo red-green-refactor extend
   - Confirmar que estos tests fallan al ejecutar `npm test` antes de continuar.
   - _Requisitos: 2.1, 2.2, 2.3, 2.4, 3.1, 3.2, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 6.1, 6.2, 6.3, 6.4_
 
-- [ ] 3. Validaciones, límite de cuerpo y manejo de errores
+- [x] 3. Validaciones, límite de cuerpo y manejo de errores
   - Configurar `express.json({ limit: '4kb' })` en `src/app.js`; el límite actual debe reemplazarse o ajustarse.
   - Actualizar el middleware de error global en `src/app.js` para interceptar:
     - Errores `SyntaxError` (JSON mal formado) → 400 `{ "error": err.message }` sin stack trace.
