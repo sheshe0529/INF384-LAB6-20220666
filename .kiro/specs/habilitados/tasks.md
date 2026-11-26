@@ -29,7 +29,7 @@ Cinco tareas en secuencia estricta que siguen un ciclo red-green-refactor extend
   - Todos los tests existentes deben seguir pasando.
   - _Requisitos: 1.1, 1.2, 1.3, 1.4, 1.5, 5.1, 5.2_
 
-- [ ] 2. Tests de seguridad y validación (deben fallar — no modificar src/)
+- [x] 2. Tests de seguridad y validación (deben fallar — no modificar src/)
   - Agregar en `tests/habilitados.test.js` los tests de las reglas de seguridad, que deben quedar en rojo hasta la tarea 3.
   - **RS-1 — Validación de tipo** (Requisito 2):
     - `aprobados` ausente → 400 `{ "error": "aprobados debe ser un array" }`.

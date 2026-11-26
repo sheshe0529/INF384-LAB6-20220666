@@ -12,6 +12,18 @@
         "chatSessionId": "sess_d6b436ce-4235-47d3-be95-c9ad755f5dd4",
         "timestamp": 1795731950920
       }
+    ],
+    "2. Tests de seguridad y validación (deben fallar — no modificar src/)": [
+      {
+        "executionId": "f4c48c2f-1f09-4bef-8e3c-e78f1eb0d57b",
+        "chatSessionId": "sess_62cec253-99de-488d-89df-f9552955e010",
+        "timestamp": 1795732215635
+      },
+      {
+        "executionId": "f4c48c2f-1f09-4bef-8e3c-e78f1eb0d57b",
+        "chatSessionId": "sess_62cec253-99de-488d-89df-f9552955e010",
+        "timestamp": 1795732286216
+      }
     ]
   }
 }
